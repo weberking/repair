@@ -1,0 +1,1606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DreamWorldTravels.com | Explore the World with Ease</title>
+    <meta name="description" content="DreamWorldTravels provides comprehensive travel information and visa services for countries worldwide.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        :root {
+            --primary: #3498db;
+            --secondary: #2c3e50;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --gray: #95a5a6;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 20px;
+            position: relative;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: 600;
+            transition: all 0.3s;
+            padding: 8px 15px;
+            border-radius: 25px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary);
+            border-radius: 50%;
+            opacity: 0.1;
+            z-index: -1;
+            transition: all 0.3s;
+        }
+
+        .nav-links a:hover::before {
+            opacity: 0.2;
+            width: 45px;
+            height: 45px;
+        }
+
+        .nav-links a.active {
+            color: white;
+        }
+
+        .nav-links a.active::before {
+            opacity: 1;
+            width: 45px;
+            height: 45px;
+        }
+
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--primary);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 150px 0;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: var(--secondary);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Page Sections */
+        .page-section {
+            display: none;
+            padding: 10px 0;
+        }
+
+        .page-section.active {
+            display: block;
+        }
+
+        /* Intro Section */
+        .intro {
+            padding: 80px 0;
+            background-color: white;
+        }
+
+        .intro-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            color: var(--secondary);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: var(--primary);
+            margin: 15px auto;
+        }
+
+        /* Destinations Section */
+        .destinations {
+            padding: 80px 0;
+            background-color: var(--light);
+        }
+
+        .destinations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .destination-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .destination-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .destination-img {
+            height: 180px;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .destination-info {
+            padding: 20px;
+        }
+
+        .destination-info h3 {
+            margin-bottom: 10px;
+            color: var(--secondary);
+        }
+
+        /* Services Section */
+        .services {
+            padding: 80px 0;
+            background-color: white;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            text-align: center;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .service-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        /* About Page */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .about-image {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Contact Page */
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .contact-info {
+            background-color: var(--light);
+            padding: 30px;
+            border-radius: 8px;
+        }
+
+        .contact-details {
+            margin-top: 20px;
+        }
+
+        .contact-details div {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .contact-details i {
+            color: var(--primary);
+            margin-right: 10px;
+            margin-top: 5px;
+        }
+
+        .contact-form {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        /* Visa Services Page */
+        .visa-process {
+            background-color: var(--light);
+            padding: 40px;
+            border-radius: 8px;
+            margin-bottom: 40px;
+        }
+
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .process-step {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .step-number {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50%;
+            line-height: 40px;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--secondary);
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--primary);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: all 0.3s;
+        }
+
+        .social-icons a:hover {
+            background-color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+
+        /* Country Page Styles */
+        .country-page {
+            display: none;
+            padding: 20px 0;
+        }
+
+        .country-page.active {
+            display: block;
+        }
+
+        .country-hero {
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 120px 0;
+            margin-bottom: 60px;
+        }
+
+        .country-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .country-content {
+            display: flex;
+            flex-direction: column;
+            gap: 50px;
+            margin-bottom: 60px;
+        }
+
+        .attraction {
+            display: flex;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .attraction:hover {
+            transform: translateY(-5px);
+        }
+
+        .attraction-content {
+            flex: 1;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .attraction-images {
+            flex: 1;
+            display: flex;
+        }
+
+        .attraction-images img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+
+        .attraction h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 1.8rem;
+        }
+
+        .attraction p {
+            color: #555;
+            font-size: 1.1rem;
+        }
+
+        .back-to-home {
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        /* Visa Application Form Styles */
+        .visa-application-form {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .success-message {
+            text-align: center;
+            padding: 40px;
+            background: #f8fff9;
+            border: 2px solid #27ae60;
+            border-radius: 8px;
+        }
+
+        .success-message ul {
+            text-align: left;
+            max-width: 400px;
+            margin: 20px auto;
+        }
+
+        .success-message li {
+            margin-bottom: 10px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .country-content,
+            .about-content,
+            .contact-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 80px;
+                left: 0;
+                right: 0;
+                background-color: white;
+                flex-direction: column;
+                text-align: center;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+                padding: 20px 0;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links li {
+                margin: 0;
+                padding: 10px 0;
+                border-bottom: 1px solid #eee;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .attraction {
+                flex-direction: column;
+            }
+            
+            .attraction-images img {
+                height: 200px;
+            }
+            
+            .visa-application-form {
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero {
+                padding: 100px 0;
+            }
+            
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+            
+            .destinations-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="#home" class="logo">DreamWorldTravels.com</a>
+                <ul class="nav-links">
+                    <li><a href="#home" class="nav-link active">Home</a></li>
+                    <li><a href="#about" class="nav-link">About</a></li>
+                    <li><a href="#visa" class="nav-link">Visa Services</a></li>
+                    <li><a href="#contact" class="nav-link">Contact</a></li>
+                </ul>
+                <div class="mobile-menu">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Home Page -->
+    <section id="home" class="page-section active">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <h1>Explore the World with Ease</h1>
+                <p>Choose country and contact us for visa</p>
+                <p>Its just a sample website so please dont apply for visa</p>
+            </div>
+        </section>
+
+        <!-- Destinations Section -->
+        <section class="destinations" id="destinations-section">
+            <div class="container">
+                <h2 class="section-title">Popular Destinations</h2>
+                <div class="destinations-grid">
+                    <!-- Turkey -->
+                    <div class="destination-card">
+                        <img src="https://www.visittheglobe.com/wp-content/uploads/2025/09/Best-Places-to-Visit-in-Turkey-A-Complete-Travel-Guide-for-2025-600x338.webp" alt="Turkey Travel Guide - Best Places to Visit in Turkey" class="destination-img">
+                        <div class="destination-info">
+                            <h3>Turkey</h3>
+                            <p>Explore Turkey's rich cultural heritage - from Istanbul's historic landmarks to Cappadocia's fairy chimneys and Mediterranean beaches.</p>
+                            <a href="#country-turkey" class="btn country-link" data-country="turkey">Explore</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Dubai -->
+                    <div class="destination-card">
+                        <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Dubai Luxury Travel - Burj Khalifa and Modern Architecture" class="destination-img">
+                        <div class="destination-info">
+                            <h3>Dubai</h3>
+                            <p>Experience Dubai's luxury shopping, ultramodern architecture & vibrant nightlife. Visit Burj Khalifa, Palm Jumeirah & desert safaris.</p>
+                            <a href="#country-dubai" class="btn country-link" data-country="dubai">Explore</a>
+                        </div>
+                    </div>
+                    
+                    <!-- France -->
+                    <div class="destination-card">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTn1A8SihSv5gFbg5zLwkxAy0JTxI4t3YrYw&s" alt="France Tourism - Eiffel Tower and French Riviera" class="destination-img">
+                        <div class="destination-info">
+                            <h3>France</h3>
+                            <p>Discover France's romantic cities, world-class cuisine & artistic heritage. Paris, French Riviera & Loire Valley castles await.</p>
+                            <a href="#country-france" class="btn country-link" data-country="france">Explore</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Thailand -->
+                    <div class="destination-card">
+                        <img src="https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Thailand Beaches and Temples - Travel Guide" class="destination-img">
+                        <div class="destination-info">
+                            <h3>Thailand</h3>
+                            <p>Experience Thailand's tropical beaches, ornate temples, and vibrant street food. Bangkok, Phuket & Chiang Mai adventures.</p>
+                            <a href="#country-thailand" class="btn country-link" data-country="thailand">Explore</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Malaysia -->
+                    <div class="destination-card">
+                        <img src="https://images.unsplash.com/photo-1596422846543-75c6fc197f07?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Malaysia Travel - Kuala Lumpur and Tropical Islands" class="destination-img">
+                        <div class="destination-info">
+                            <h3>Malaysia</h3>
+                            <p>Discover Malaysia's diverse culture, modern cities & pristine rainforests. Petronas Towers, Langkawi islands & Borneo wildlife.</p>
+                            <a href="#country-malaysia" class="btn country-link" data-country="malaysia">Explore</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Japan -->
+                    <div class="destination-card">
+                        <img src="https://www.familiesworldwide.co.uk/images/general/blog_japan_tokyo_night.jpg" alt="Japan Travel - Tokyo and Traditional Culture" class="destination-img">
+                        <div class="destination-info">
+                            <h3>Japan</h3>
+                            <p>Explore Japan's perfect blend of ancient traditions & cutting-edge technology. Tokyo, Kyoto temples & Mount Fuji views.</p>
+                            <a href="#country-japan" class="btn country-link" data-country="japan">Explore</a>
+                        </div>
+                    </div>
+                    
+                    <!-- UK -->
+                    <div class="destination-card">
+                        <img src="https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="United Kingdom Travel - London and British Heritage" class="destination-img">
+                        <div class="destination-info">
+                            <h3>United Kingdom</h3>
+                            <p>Experience UK's royal heritage, historic landmarks & cosmopolitan cities. London, Scottish Highlands & Welsh castles.</p>
+                            <a href="#country-uk" class="btn country-link" data-country="uk">Explore</a>
+                        </div>
+                    </div>
+                    
+                    <!-- USA -->
+                    <div class="destination-card">
+                        <img src="https://images.unsplash.com/photo-1485738422979-f5c462d49f74?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="USA Travel - New York and National Parks" class="destination-img">
+                        <div class="destination-info">
+                            <h3>United States</h3>
+                            <p>Discover USA's iconic cities, stunning national parks & diverse landscapes. New York, Grand Canyon & California coast.</p>
+                            <a href="#country-usa" class="btn country-link" data-country="usa">Explore</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section class="services">
+            <div class="container">
+                <h2 class="section-title">Our Services</h2>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-map-marked-alt"></i>
+                        </div>
+                        <h3>Travel Planning</h3>
+                        <p>We create customized plan based on your preferences, budget, and travel style. Our expert planners ensure you experience the best each destination has to offer.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-passport"></i>
+                        </div>
+                        <h3>Visa Services</h3>
+                        <p>Expert assistance with visa applications, documentation, and processing for smooth travel. We handle the complex paperwork so you can focus on your journey.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                        <h3>24/7 Support</h3>
+                        <p>Round-the-clock customer support during your travels. Emergency assistance, travel updates, and on-ground support whenever you need it.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+
+    <!-- About Page -->
+    <section id="about" class="page-section">
+        <div class="container">
+            <h2 class="section-title">About DreamWorldTravels</h2>
+            <div class="about-content">
+                <div>
+                    <h3>Our Story</h3>
+                    <p>Founded in 2010, DreamWorldTravels has been helping travelers explore the world with confidence and ease. We started with a simple mission: to make international travel accessible to everyone.</p>
+                    <p>Over the years, we've grown into a trusted travel partner for thousands of customers, offering comprehensive travel planning and visa services for over 20 countries worldwide.</p>
+                    <h3>Our Mission</h3>
+                    <p>To provide seamless travel experiences by offering expert guidance, reliable visa services, and personalized travel solutions that cater to every traveler's needs.</p>
+                    <h3>Why Choose Us?</h3>
+                    <ul>
+                        <li>10+ years of experience in travel industry</li>
+                        <li>Expert visa consultants with 95% success rate</li>
+                        <li>24/7 customer support during your travels</li>
+                        <li>Customized plan based on your preferences</li>
+                        <li>Competitive pricing with no hidden charges</li>
+                    </ul>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.adsttc.com/media/images/64a5/7f87/cb9c/4621/9f93/e1ae/newsletter/new-building-for-the-parliament-of-india-hcp-design-planning-and-management_1.jpg?1688567705" alt="Our Team">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Visa Services Page -->
+    <section id="visa" class="page-section">
+        <div class="container">
+            <h2 class="section-title">Visa Services</h2>
+            <div class="visa-process">
+                <h3>How Our Visa Service Works</h3>
+                <p>We simplify the visa application process with our expert guidance and support at every step.</p>
+                <div class="process-steps">
+                    <div class="process-step">
+                        <div class="step-number">1</div>
+                        <h4>Consultation</h4>
+                        <p>Free initial consultation to understand your travel plans and visa requirements</p>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-number">2</div>
+                        <h4>Documentation</h4>
+                        <p>We help you prepare and verify all required documents for your visa application</p>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-number">3</div>
+                        <h4>Application</h4>
+                        <p>Our experts handle the complete application process with embassies and consulates</p>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-number">4</div>
+                        <h4>Follow-up</h4>
+                        <p>We track your application status and provide updates until visa approval</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <h3>Document Preparation</h3>
+                    <p>We guide you through the document requirements and help prepare your application package with 100% accuracy.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <h3>Application Review</h3>
+                    <p>Our experts review your complete application to ensure it meets all embassy requirements before submission.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3>Fast Processing</h3>
+                    <p>We prioritize your application and follow up regularly to ensure timely processing and approval.</p>
+                </div>
+            </div>
+            
+            <div class="apply-visa">
+                <h3>Ready to Apply for Your Visa?</h3>
+                <p>Complete this short form and our team will contact you to proceed with your application</p>
+                
+                <div class="visa-application-form" id="visa-application">
+                    <form id="visaForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="applicant-name">Full Name *</label>
+                                <input type="text" id="applicant-name" name="applicant-name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="applicant-email">Email Address *</label>
+                                <input type="email" id="applicant-email" name="applicant-email" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="applicant-phone">Phone Number *</label>
+                                <input type="tel" id="applicant-phone" name="applicant-phone" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="applicant-country">Destination Country *</label>
+                                <select id="applicant-country" name="applicant-country" required>
+                                    <option value="">Select Country</option>
+                                    <option value="Turkey">Turkey</option>
+                                    <option value="Dubai">Dubai (UAE)</option>
+                                    <option value="France">France</option>
+                                    <option value="Thailand">Thailand</option>
+                                    <option value="Malaysia">Malaysia</option>
+                                    <option value="Japan">Japan</option>
+                                    <option value="United Kingdom">United Kingdom</option>
+                                    <option value="United States">United States</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="travel-date">Planned Travel Date</label>
+                                <input type="date" id="travel-date" name="travel-date">
+                            </div>
+                            <div class="form-group">
+                                <label for="visa-type">Visa Type</label>
+                                <select id="visa-type" name="visa-type">
+                                    <option value="Tourist">Tourist Visa</option>
+                                    <option value="Business">Business Visa</option>
+                                    <option value="Student">Student Visa</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="additional-notes">Additional Notes (Optional)</label>
+                            <textarea id="additional-notes" name="additional-notes" placeholder="Any specific requirements or questions..."></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn">Submit Visa Application</button>
+                    </form>
+                    
+                    <div id="visa-success" style="display: none;">
+                        <div class="success-message">
+                            <i class="fas fa-check-circle" style="font-size: 3rem; color: #27ae60; margin-bottom: 20px;"></i>
+                            <h3>Your Visa Application Has Been Received!</h3>
+                            <p>Thank you for submitting your visa application for <span id="success-country"></span>. Our team will contact you within 24 hours to proceed with the documentation and process.</p>
+                            <p><strong>Next Steps:</strong></p>
+                            <ul>
+                                <li>Our visa expert will call you on the provided number</li>
+                                <li>We'll guide you through required documents</li>
+                                <li>We'll handle the complete application process</li>
+                                <li>Regular updates until visa approval</li>
+                            </ul>
+                            <button class="btn" id="new-application">Apply for Another Visa</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Page -->
+    <section id="contact" class="page-section">
+        <div class="container">
+            <h2 class="section-title">Contact Us</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Get In Touch</h3>
+                    <p>Have questions about our services or need assistance with your travel plans? We're here to help!</p>
+                    
+                    <div class="contact-details">
+                        <div>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <strong>Office Address</strong><br>
+                                Blue Area Building Number 4<br>
+                                Islamabad, Pakistan
+                            </div>
+                        </div>
+                        <div>
+                            <i class="fas fa-phone"></i>
+                            <div>
+                                <strong>Phone Number</strong><br>
+                                +92 319 5678502<br>
+                                +92 51 4587126
+                            </div>
+                        </div>
+                        <div>
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <strong>Email Address</strong><br>
+                                dreamworldtravels@gmail.com<br>
+                                worldtravels@gmail.com
+                            </div>
+                        </div>
+                        <div>
+                            <i class="fas fa-clock"></i>
+                            <div>
+                                <strong>Business Hours</strong><br>
+                                Monday - Friday: 9:00 AM - 6:00 PM<br>
+                                Saturday: 10:00 AM - 4:00 PM<br>
+                                Sunday: Closed
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <h3>Send us a Message</h3>
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone">
+                        </div>
+                        <div class="form-group">
+                            <label for="service">Service Interested In</label>
+                            <select id="service" name="service">
+                                <option value="">Select a service</option>
+                                <option value="visa">Visa Services</option>
+                                <option value="travel">Travel Planning</option>
+                                <option value="both">Both Services</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" required></textarea>
+                        </div>
+                        <button type="submit" class="btn">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Country Pages -->
+    
+    <!-- Turkey -->
+    <section id="country-turkey" class="page-section country-page">
+        <div class="country-hero" style="background-image:url('https://www.onenationtravel.com/wp-content/uploads/2025/05/Istanbul58-1200x600.jpg.webp');">
+            <div class="container">
+                <h1>Turkeya </h1>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="country-content">
+                <!-- Hagia Sophia -->
+                <div class="attraction">
+                    <div class="attraction-content">
+                        <h3>Hagia Sophia, Istanbul</h3>
+                        <p>Once a church, then a mosque, and now a museum, Hagia Sophia represents Istanbul's rich historical tapestry. This architectural marvel showcases Byzantine engineering with its massive dome and intricate mosaics, standing as a testament to the city's diverse cultural heritage.</p>
+                    </div>
+                    <div class="attraction-images">
+                        <img src="https://www.travelandtourworld.com/wp-content/uploads/2025/11/Turkey-850x567.jpeg" alt="Hagia Sophia Istanbul Byzantine Architecture">
+                    </div>
+                </div>
+
+                <!-- Cappadocia -->
+                <div class="attraction">
+                    <div class="attraction-content">
+                        <h3>Cappadocia Fairy Chimneys</h3>
+                        <p>Famous for its unique rock formations and spectacular hot air balloon rides, Cappadocia offers a surreal landscape unlike any other. Explore ancient cave churches and underground cities carved into the soft volcanic rock, witnessing a geological wonder formed over millions of years.</p>
+                    </div>
+                    <div class="attraction-images">
+                        <img src="https://ychef.files.bbci.co.uk/1280x720/p014pgf2.jpg" alt="Cappadocia Fairy Chimneys Hot Air Balloons">
+                    </div>
+                </div>
+
+                <!-- Pamukkale -->
+                <div class="attraction">
+                    <div class="attraction-content">
+                        <h3>Pamukkale Thermal Pools</h3>
+                        <p>The "Cotton Castle" thermal pools create stunning white terraces filled with mineral-rich waters. These natural thermal springs have been used as a spa since the 2nd century BC, with the ancient city of Hierapolis overlooking the terraces, offering both historical and natural wonders.</p>
+                    </div>
+                    <div class="attraction-images">
+                        <img src="https://www.traveltalktours.com/wp-content/uploads/2022/04/pamukkale-thermal-pools.jpg" alt="Pamukkale Thermal Pools White Terraces">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="back-to-home">
+                <a href="#home" class="btn">Back to Destinations</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dubai -->
+    <section id="country-dubai" class="page-section country-page">
+        <div class="country-hero" style="background-image: url('https://images.unsplash.com/photo-1512453979798-5ea266f8880c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');">
+            <div class="container">
+                <h1>Dubai</h1>
+                <p></p>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="country-content">
+                <!-- Burj Khalifa -->
+                <div class="attraction">
+                    <div class="attraction-content">
+                        <h3>Burj Khalifa</h3>
+                        <p>Soaring at 828 meters, the Burj Khalifa is the world's tallest building and an architectural marvel. Visit the observation decks on the 124th and 148th floors for breathtaking panoramic views of Dubai's skyline and the surrounding desert, especially stunning at sunset.</p>
+                    </div>
+                    <div class="attraction-images">
+                        <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Burj Khalifa World's Tallest Building">
+                    </div>
+                </div>
+
+                <!-- Palm Jumeirah -->
+                <div class="attraction">
+                    <div class="attraction-content">
+                        <h3>The Palm Jumeirah</h3>
+                        <p>This artificial archipelago shaped like a palm tree is one of Dubai's most iconic landmarks. Home to luxury hotels including Atlantis The Palm, it offers pristine beaches, world-class dining, and spectacular views of the Arabian Gulf, representing human engineering at its finest.</p>
+                    </div>
+                    <div class="attraction-images">
+                        <img src="https://images.unsplash.com/photo-1518684079-3c830dcef090?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Palm Jumeirah Aerial View">
+                    </div>
+                </div>
+
+                <!-- Dubai Mall -->
+                <div class="attraction">
+                    <div class="attraction-content">
+                        <h3>Dubai Mall & Fountain Show</h3>
+                        <p>The world's largest shopping mall by total area, Dubai Mall features over 1,200 stores, an massive aquarium, Olympic-sized ice rink, and the spectacular Dubai Fountain show that dances to music and lights every evening, creating a mesmerizing spectacle for visitors.</p>
+                    </div>
+                    <div class="attraction-images">
+                        <img src="https://oddviser.com/photo/place/1600/377.jpg" alt="Dubai Mall Interior">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="back-to-home">
+                <a href="#home" class="btn">Back to Destinations</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- France -->
+    <section id="country-france" class="page-section country-page">
+        <div class="country-hero" style="background-image: url('https://i.natgeofe.com/k/54b5e731-f8d6-4a93-92e0-b7b137cac411/france-champs-elysees-paris.jpg?wp=1&w=1084.125&h=609');">
+            <div class="container">
+                <h1>France</h1>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="country-content">
+                <!-- Eiffel Tower -->
+                <div class="attraction">
+                    <div class="attraction-content">
+                        <h3>Eiffel Tower, Paris</h3>
+                        <p>The iconic Eiffel Tower is the symbol of Paris and one of the most recognizable structures in the world. Built for the 1889 World's Fair, it offers stunning views of the City of Light from its observation decks, especially magical when illuminated at night.</p>
+                    </div>
+                    <div class="attraction-images">
+                        <img src="https://www.travelandleisure.com/thmb/SPUPzO88ZXq6P4Sm4mC5Xuinoik=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/eiffel-tower-paris-france-EIFFEL0217-6ccc3553e98946f18c893018d5b42bde.jpg" alt="Eiffel Tower Paris">
+                    </div>
+                </div>
+
+                <!-- Louvre Museum -->
+                <div class="attraction">
+                    <div class="attraction-content">
+                        <h3>Louvre Museum</h3>
+                        <p>The world's largest art museum, the Louvre houses thousands of works including the Mona Lisa and Venus de Milo. Its iconic glass pyramid entrance has become a landmark in its own right, welcoming visitors to explore centuries of artistic masterpieces and cultural treasures.</p>
+                    </div>
+                    <div class="attraction-images">
+                        <img src="https://cdn.britannica.com/02/121002-050-92DB902F/Louvre-Museum-pyramid-Paris-Pei-IM.jpg" alt="Louvre Museum Exterior">
+                    </div>
+                </div>
+
+                <!-- French Riviera -->
+                <div class="attraction">
+                    <div class="attraction-content">
+                        <h3>French Riviera</h3>
+                        <p>The glamorous French Riviera stretches along the Mediterranean coast, featuring luxurious resorts like Nice, Cannes, and Saint-Tropez. Enjoy beautiful beaches, luxury yachts, and stunning coastal scenery in this playground for the rich and famous with a perfect climate.</p>
+                    </div>
+                    <div class="attraction-images">
+                        <img src="https://68c8648dbe66747498d1-6027f91c84d2b73bebfc9b6bc4f4a0ac.ssl.cf3.rackcdn.com/67bddc3476123130a4db5771/T2624mobilemin.jpg" alt="French Riviera Coast">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="back-to-home">
+                <a href="#home" class="btn">Back to Destinations</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Thailand -->
+    <section id="country-thailand" class="page-section country-page">
+        <div class="country-hero" style="background-image:url('https://cdn.tourradar.com/s3/serp/original/4600_t8afNwa2.jpg');">
+            <div class="container">
+                <h1>Thailand </h1>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="country-content">
+                <!-- Grand Palace -->
+                <div class="attraction">
+                    <div class="attraction-content">
+                        <h3>Grand Palace, Bangkok</h3>
+                        <p>The magnificent Grand Palace in Bangkok has been the official residence of the Kings of Siam since 1782. This stunning complex of buildings at the heart of the city features intricate architecture, glittering temples, and the sacred Emerald Buddha, representing Thailand's rich royal heritage.</p>
+                    </div>
+                    <div class="attraction-images">
+                        <img src="https://i0.wp.com/leightontravels.com/wp-content/uploads/2021/03/Phra-Thinang-Chakri-Maha-Prasat-Grand-Palace-Bangkok.jpg?fit=1587%2C893&ssl=1" alt="Grand Palace Bangkok">
+                    </div>
+                </div>
+
+                <!-- Phi Phi Islands -->
+                <div class="attraction">
+                    <div class="attraction-content">
+                        <h3>Phi Phi Islands</h3>
+                        <p>These stunning islands in the Andaman Sea feature crystal-clear turquoise waters, dramatic limestone cliffs, and pristine white sand beaches. Made famous by the movie "The Beach," the Phi Phi Islands offer world-class diving, snorkeling, and breathtaking natural scenery.</p>
+                    </div>
+                    <div class="attraction-images">
+                        <img src="https://cdn-imgix.headout.com/media/images/535ebc22d85245a90fd2c1c74fc62ffd-27586-phuket-from-phuket-phi-phi-island--bamboo--and-sunset-maiton-island-by-speed-catamaran-07.jpg?auto=format&w=1222.3999999999999&h=687.6&q=90&ar=16%3A9&crop=faces&fit=crop" alt="Phi Phi Islands Thailand">
+                    </div>
+                </div>
+
+                <!-- Chiang Mai Temples -->
+                <div class="attraction">
+                    <div class="attraction-content">
+                        <h3>Chiang Mai Temples</h3>
+                        <p>Chiang Mai in northern Thailand is home to hundreds of beautiful Buddhist temples, including the famous Doi Suthep perched on a mountain overlooking the city. These sacred sites showcase Lanna architecture and offer peaceful retreats for meditation and cultural immersion.</p>
+                    </div>
+                    <div class="attraction-images">
+                        <img src="https://www.aleenta.com/wp-content/uploads/Chiang-Mai-Walking-Tour.jpg" alt="Chiang Mai Temple">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="back-to-home">
+                <a href="#home" class="btn">Back to Destinations</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Malaysia -->
+    <section id="country-malaysia" class="page-section country-page">
+        <div class="country-hero" style="background-image:  url('https://images.travelandleisureasia.com/wp-content/uploads/sites/4/2024/03/19183124/kuala-lumpur-feature-image-1600x900.jpeg');">
+            <div class="container">
+                <h1>Malaysia</h1>
+                <p></p>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="country-content">
+                <!-- Petronas Towers -->
+                <div class="attraction">
+                    <div class="attraction-content">
+                        <h3>Petronas Twin Towers</h3>
+                        <p>The iconic Petronas Twin Towers in Kuala Lumpur were the world's tallest buildings from 1998 to 2004. These 88-story skyscrapers feature a skybridge connecting the two towers on the 41st and 42nd floors, offering spectacular views of the city's modern skyline.</p>
+                    </div>
+                    <div class="attraction-images">
+                        <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/16/76/d5/e8/die-petronas-towers-sind.jpg?w=900&h=500&s=1" alt="Petronas Twin Towers">
+                    </div>
+                </div>
+
+                <!-- Langkawi -->
+                <div class="attraction">
+                    <div class="attraction-content">
+                        <h3>Langkawi Islands</h3>
+                        <p>Langkawi is a beautiful archipelago of 99 islands in the Andaman Sea, known for its pristine beaches, lush rainforests, and clear waters. The islands offer cable car rides with panoramic views, mangrove tours, and duty-free shopping in a tropical paradise setting.</p>
+                    </div>
+                    <div class="attraction-images">
+                        <img src="https://cdn.prod.website-files.com/64d618bb0ccc37b64e1d6053/65db7a0a09d579631b685595_Resort-Introduction-Section_1920-X-1080.jpg" alt="Langkawi Islands">
+                    </div>
+                </div>
+
+                <!-- Batu Caves -->
+                <div class="attraction">
+                    <div class="attraction-content">
+                        <h3>Batu Caves</h3>
+                        <p>These limestone hills containing caves and cave temples are a popular Hindu shrine outside Kuala Lumpur. Visitors climb 272 colorful steps to reach the main cave temple, passing the massive golden statue of Lord Murugan, one of the tallest Hindu statues in the world.</p>
+                    </div>
+                    <div class="attraction-images">
+                        <img src="https://cdn-imgix.headout.com/media/images/8c537f2582951808f053e92278f712c5-28559-pahang-from-kuala-lumpur--genting-highlands---batu-caves-day-trip-02.jpg?auto=format&w=900&h=562.5&q=90&ar=16%3A10&crop=faces%2Ccenter&fit=crop" alt="Batu Caves Malaysia">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="back-to-home">
+                <a href="#home" class="btn">Back to Destinations</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Japan -->
+    <section id="country-japan" class="page-section country-page">
+        <div class="country-hero" style="background-image:  url('https://profit.pakistantoday.com.pk/wp-content/uploads/2025/04/japan.jpg');">
+            <div class="container">
+                <h1>Japan</h1>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="country-content">
+                <!-- Mount Fuji -->
+                <div class="attraction">
+                    <div class="attraction-content">
+                        <h3>Mount Fuji</h3>
+                        <p>Japan's tallest peak and active volcano, Mount Fuji is one of the country's most iconic symbols. This perfectly symmetrical volcano is considered sacred and has been featured in countless works of art. Climbing season runs from July to September, offering breathtaking views.</p>
+                    </div>
+                    <div class="attraction-images">
+                        <img src="https://www.datocms-assets.com/101439/1703136003-beautiful-mountain-of-japan-mount-fuji.webp?auto=format&fit=crop&h=800&w=1200" alt="Mount Fuji Japan">
+                    </div>
+                </div>
+
+                <!-- Fushimi Inari Shrine -->
+                <div class="attraction">
+                    <div class="attraction-content">
+                        <h3>Fushimi Inari Shrine, Kyoto</h3>
+                        <p>Famous for its thousands of vermilion torii gates that trail up the mountain, this Shinto shrine in Kyoto is dedicated to Inari, the god of rice. The scenic paths lead through the forest to smaller shrines, offering a magical experience especially during early morning or sunset.</p>
+                    </div>
+                    <div class="attraction-images">
+                        <img src="https://www.agoda.com/wp-content/uploads/2024/07/Fushimi-Inari-Shrine-Kyoto-Japan.jpg" alt="Fushimi Inari Shrine">
+                    </div>
+                </div>
+
+                <!-- Tokyo Skytree -->
+                <div class="attraction">
+                    <div class="attraction-content">
+                        <h3>Tokyo Skytree</h3>
+                        <p>Standing at 634 meters, Tokyo Skytree is the tallest structure in Japan and the second tallest in the world. This broadcasting and observation tower offers unparalleled 360-degree views of Tokyo from its two observation decks, showcasing the vast expanse of the world's largest metropolitan area.</p>
+                    </div>
+                    <div class="attraction-images">
+                        <img src="https://www.japanrailclub.com/wp-content/uploads/2024/11/Tokyo-Skytree-interior-1024x512.jpg" alt="Tokyo Skytree">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="back-to-home">
+                <a href="#home" class="btn">Back to Destinations</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- UK -->
+    <section id="country-uk" class="page-section country-page">
+        <div class="country-hero" style="background-image: url('https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');">
+            <div class="container">
+                <h1>United Kingdom</h1>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="country-content">
+                <!-- Buckingham Palace -->
+                <div class="attraction">
+                    <div class="attraction-content">
+                        <h3>Buckingham Palace</h3>
+                        <p>The London residence of the British monarch, Buckingham Palace is one of the world's most famous buildings. Visitors can watch the Changing of the Guard ceremony and during summer months, tour the magnificent State Rooms filled with treasures from the Royal Collection.</p>
+                    </div>
+                    <div class="attraction-images">
+                        <img src="https://www.britainexpress.com/images/attractions/editor3/Buckingham-Palace-6277.jpg" alt="Buckingham Palace">
+                    </div>
+                </div>
+
+                <!-- Stonehenge -->
+                <div class="attraction">
+                    <div class="attraction-content">
+                        <h3>Stonehenge</h3>
+                        <p>This prehistoric monument in Wiltshire continues to mystify archaeologists and visitors alike. The massive stone circles dating back to 2500 BC align with the movements of the sun, creating one of the world's most famous and spiritually significant ancient sites.</p>
+                    </div>
+                    <div class="attraction-images">
+                        <img src="https://www.english-heritage.org.uk/siteassets/home/visit/places-to-visit/stonehenge/history/significance/stonehenge-from-ne-800x420.jpg" alt="Stonehenge UK">
+                    </div>
+                </div>
+
+                <!-- Edinburgh Castle -->
+                <div class="attraction">
+                    <div class="attraction-content">
+                        <h3>Edinburgh Castle</h3>
+                        <p>Perched atop an extinct volcano, Edinburgh Castle dominates the skyline of Scotland's capital. This historic fortress has witnessed many significant events in Scottish history and houses the Crown Jewels, the Stone of Destiny, and Mons Meg medieval cannon.</p>
+                    </div>
+                    <div class="attraction-images">
+                        <img src="https://cdn-imgix.headout.com/media/images/e87de52c14e5ed44c472de964beb21bf-25331-EdinburghCastle-GuidedwalkingtourwithFastTrackEntry---002.jpg" alt="Edinburgh Castle">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="back-to-home">
+                <a href="#home" class="btn">Back to Destinations</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- USA -->
+    <section id="country-usa" class="page-section country-page">
+        <div class="country-hero" style="background-image:  url('https://deluxeholidays.com/wp-content/uploads/2025/03/USA.png');">
+            <div class="container">
+                <h1>United States</h1>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="country-content">
+                <!-- Grand Canyon -->
+                <div class="attraction">
+                    <div class="attraction-content">
+                        <h3>Grand Canyon</h3>
+                        <p>One of the world's most spectacular natural wonders, the Grand Canyon reveals billions of years of geological history in its layered bands of red rock. Carved by the Colorado River, this immense canyon offers breathtaking views, hiking trails, and river rafting adventures.</p>
+                    </div>
+                    <div class="attraction-images">
+                        <img src="https://www.nps.gov/grca/planyourvisit/images/mather-point-2021.jpg" alt="Grand Canyon USA">
+                    </div>
+                </div>
+
+                <!-- Statue of Liberty -->
+                <div class="attraction">
+                    <div class="attraction-content">
+                        <h3>Statue of Liberty</h3>
+                        <p>A universal symbol of freedom and democracy, the Statue of Liberty was a gift from France to the United States. Located on Liberty Island in New York Harbor, this colossal neoclassical sculpture welcomes visitors to climb to the crown for panoramic views of New York City.</p>
+                    </div>
+                    <div class="attraction-images">
+                        <img src="https://images.unsplash.com/photo-1485738422979-f5c462d49f74?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Statue of Liberty">
+                    </div>
+                </div>
+
+                <!-- Golden Gate Bridge -->
+                <div class="attraction">
+                    <div class="attraction-content">
+                        <h3>Golden Gate Bridge</h3>
+                        <p>This iconic suspension bridge connecting San Francisco to Marin County is one of the most photographed bridges in the world. The International Orange-colored bridge spans the Golden Gate strait and offers stunning views of the San Francisco Bay and city skyline.</p>
+                    </div>
+                    <div class="attraction-images">
+                        <img src="https://media.cnn.com/api/v1/images/stellar/prod/181002113456-01-golden-gate-bridge-restricted.jpg?q=w_3653,h_2055,x_0,y_0,c_fill" alt="Golden Gate Bridge">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="back-to-home">
+                <a href="#home" class="btn">Back to Destinations</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>DreamWorldTravels</h3>
+                    <p>Your trusted partner for travel information and visa services to 20+ countries worldwide.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home" class="footer-link">Home</a></li>
+                        <li><a href="#about" class="footer-link">About Us</a></li>
+                        <li><a href="#visa" class="footer-link">Visa Services</a></li>
+                        <li><a href="#contact" class="footer-link">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Info</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-map-marker-alt"></i> Blue Area Building Number 4, Islamabad</li>
+                        <li><i class="fas fa-phone"></i> 03195678502</li>
+                        <li><i class="fas fa-envelope"></i> dreamworldtravels@gmail.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 DreamWorldTravels.com. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Mobile Menu Toggle
+        document.querySelector('.mobile-menu').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+
+        // Page Navigation
+        document.querySelectorAll('.nav-link, .footer-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href').substring(1);
+                showPage(targetId);
+                
+                // Close mobile menu if open
+                document.querySelector('.nav-links').classList.remove('active');
+            });
+        });
+
+        // Country Page Navigation
+        document.querySelectorAll('.country-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const country = this.getAttribute('data-country');
+                showCountryPage(country);
+                
+                // Close mobile menu if open
+                document.querySelector('.nav-links').classList.remove('active');
+            });
+        });
+
+        // Back to Home from Country Page
+        document.querySelectorAll('.back-to-home a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                showPage('home');
+            });
+        });
+
+        // Visa Application Form
+        document.getElementById('visaForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const country = document.getElementById('applicant-country').value;
+            
+            // Show success message
+            document.getElementById('visa-success').style.display = 'block';
+            document.getElementById('visaForm').style.display = 'none';
+            document.getElementById('success-country').textContent = country;
+        });
+
+        // New Application Button
+        document.getElementById('new-application').addEventListener('click', function() {
+            document.getElementById('visa-success').style.display = 'none';
+            document.getElementById('visaForm').style.display = 'block';
+            document.getElementById('visaForm').reset();
+        });
+
+        // Contact form submission
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your message! We will get back to you soon.');
+            this.reset();
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.querySelector('.nav-links').classList.remove('active');
+            });
+        });
+
+        // Helper Functions
+        function showPage(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.page-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Show target page
+            document.getElementById(pageId).classList.add('active');
+            
+            // Update active nav link
+            document.querySelectorAll('.nav-link').forEach(navLink => {
+                navLink.classList.remove('active');
+            });
+            document.querySelector(`a[href="#${pageId}"]`).classList.add('active');
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        function showCountryPage(country) {
+            // Hide all pages
+            document.querySelectorAll('.page-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Show country page
+            document.getElementById(`country-${country}`).classList.add('active');
+            
+            // Update active nav link
+            document.querySelectorAll('.nav-link').forEach(navLink => {
+                navLink.classList.remove('active');
+            });
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+    </script>
+</body>
+</html>
